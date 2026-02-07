@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ps. Pablo Uribe Bissotto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f6f7;
+            color: #333;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: #3f7f7a;
+            color: white;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            height: 420px;
+            background: linear-gradient(
+                rgba(30, 60, 90, 0.75),
+                rgba(30, 60, 90, 0.75)
+            ),
+            url("https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3")
+            center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .hero-content h1 {
+            margin-top: 0;
+        }
+
+        /* ===== MAIN ===== */
+        main {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 20px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .box {
+            background: white;
+            border-radius: 6px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .box h2 {
+            margin-top: 0;
+            color: #3f7f7a;
+        }
+
+        .box p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .justificado {
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .box ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        /* ===== FORM ===== */
+        form label {
+            display: block;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        form input,
+        form textarea,
+        form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        form button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background: #3f7f7a;
+            border: none;
+            color: white;
+            font-size: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #356c68;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            padding: 20px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                height: 300px;
+                padding: 25px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <strong>Ps. Pablo Uribe Bissotto</strong>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#atencion">Atención</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Un espacio para tu bienestar mental</h1>
+        <p>
+            Acompañamiento profesional en un entorno seguro, confidencial
+            y centrado en tu bienestar emocional.
+        </p>
+    </div>
+</section>
+
+<main>
+    <div class="container">
+
+        <div class="box" id="atencion">
+            <h2>Información de Atención</h2>
+
+            <p class="justificado">
+                Se ofrece atención psicológica individual dirigida a personas de todas las edades, orientada al bienestar emocional y al fortalecimiento de recursos personales. El proceso terapéutico se desarrolla en un espacio seguro, confidencial y respetuoso, adaptado a las características y necesidades de cada etapa del ciclo vital. La intervención aborda diversas problemáticas, tales como ansiedad, estado de ánimo, manejo del estrés, dificultades relacionales y procesos de adaptación personal, considerando un enfoque profesional, ético y centrado en la persona. La atención se realiza en modalidad presencial y online.
+            </p>
+
+            <strong>Modalidades:</strong>
+            <ul>
+                <li>Presencial: Centro Integral Cumbres, Calle Tangue 155, Ovalle.</li>
+                <li>Online (videollamada)</li>
+            </ul>
+
+            <strong>Horarios:</strong>
+            <ul>
+                <li>Lunes a Viernes: 09:00 – 19:00 hrs</li>
+                <li>Sábados: 10:00 – 14:00 hrs</li>
+            </ul>
+        </div>
+
+        <div class="box" id="contacto">
+            <h2>Agendar una Cita</h2>
+
+            <form action="https://formspree.io/f/mjkgzrrq" method="POST">
+                <label>Nombre Completo</label>
+                <input type="text" name="nombre" required>
+
+                <label>Correo Electrónico</label>
+                <input type="email" name="email" required>
+
+                <label>WhatsApp / Teléfono</label>
+                <input type="tel" name="telefono" placeholder="+56 9 XXXX XXXX" required>
+
+                <label>Modalidad</label>
+                <select name="modalidad">
+                    <option value="Presencial">Presencial</option>
+                    <option value="Online">Online</option>
+                </select>
+
+                <label>Breve motivo de consulta (opcional)</label>
+                <textarea name="mensaje"></textarea>
+
+                <input type="text" name="_gotcha" style="display:none">
+
+                <button type="submit">Enviar Solicitud</button>
+            </form>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    © 2026 Ps. Pablo Uribe Bissotto · Todos los derechos reservados<br>
+    psicologopablouribe@gmail.com
+</footer>
+
+</body>
+</html>

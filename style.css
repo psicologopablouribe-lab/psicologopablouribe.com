@@ -1,0 +1,80 @@
+.justificado {
+    text-align: justify;
+    line-height: 1.6;
+    hyphens: auto;
+}
+
+:root { --ink: #171717; --muted: #686868; --paper: #f1f0ed; --orange: #f26522; --line: #d9d7d2; }
+* { box-sizing: border-box; }
+body.site-page { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; }
+.site-header { padding: 14px 18px; position: relative; z-index: 2; }
+.site-nav { max-width: 1400px; margin: auto; min-height: 58px; padding: 5px; border-radius: 40px; background: #fff; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 2px 12px #0000000b; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font: 600 14px Arial, sans-serif; }
+.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: #fff; font: 700 11px Arial, sans-serif; }
+.nav-links { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 34px); font: 13px Arial, sans-serif; }
+.nav-links a { color: #555; text-decoration: none; padding: 8px 0; border-bottom: 1px solid transparent; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); border-color: var(--orange); }
+.nav-cta, .button { display: inline-flex; align-items: center; gap: 14px; border-radius: 30px; text-decoration: none; font: 600 13px Arial, sans-serif; }
+.nav-cta { background: var(--ink); color: white; padding: 13px 18px; white-space: nowrap; }
+.nav-cta svg, .button svg { width: 16px; height: 16px; }
+.page-hero, .content-section, .process-section, .details-section, .contact-hero { max-width: 1400px; margin: auto; padding: clamp(70px, 11vw, 150px) clamp(24px, 6vw, 88px); }
+.page-hero { min-height: 590px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; background: radial-gradient(circle at 82% 36%, #f9c7a9 0, transparent 25%), var(--paper); }
+.page-hero-split { display: grid; grid-template-columns: 1fr .75fr; align-items: center; gap: 8vw; }
+.eyebrow { margin: 0 0 24px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font: 11px Arial, sans-serif; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { max-width: 850px; margin-bottom: 28px; font-size: clamp(3.7rem, 9vw, 8.5rem); font-weight: 400; line-height: .91; letter-spacing: -.06em; }
+h1 em { color: var(--orange); font-style: normal; }
+.hero-copy { max-width: 500px; margin-bottom: 32px; color: var(--muted); font-size: 18px; line-height: 1.5; }
+.button { padding: 15px 20px; }
+.button-orange { background: var(--orange); color: #fff; }
+.button-dark { background: var(--ink); color: #fff; }
+.hero-image { aspect-ratio: 4 / 5; overflow: hidden; }
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+.content-section { background: #fff; max-width: none; padding-left: max(24px, calc((100% - 1224px) / 2)); padding-right: max(24px, calc((100% - 1224px) / 2)); }
+.section-intro { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; margin-bottom: 70px; }
+h2 { max-width: 720px; margin-bottom: 0; font-size: clamp(2.4rem, 5vw, 5rem); font-weight: 400; line-height: .98; letter-spacing: -.05em; }
+.section-intro h2 { margin-left: auto; }
+.service-grid, .certificate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.service-card, .certificate-card { min-height: 265px; padding: 32px; background: #fff; }
+.service-card svg, .certificate-card > svg { width: 27px; height: 27px; margin-bottom: 50px; color: var(--orange); }
+.service-card h3, .certificate-card h3 { margin-bottom: 12px; font: 600 17px Arial, sans-serif; }
+.service-card p, .certificate-card p, .training-card p { color: var(--muted); font: 14px/1.55 Arial, sans-serif; }
+.process-section, .details-section { display: grid; grid-template-columns: 1fr 1fr; gap: 10vw; }
+.steps { border-top: 1px solid var(--line); }
+.steps div { display: grid; grid-template-columns: 50px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.steps span, .training-number { color: var(--orange); font: 12px Arial, sans-serif; }
+.steps p { margin: 0; font: 16px/1.45 Arial, sans-serif; }
+.training-list { border-top: 1px solid var(--line); }
+.training-card { display: grid; grid-template-columns: 60px 1fr 30px; gap: 20px; padding: 34px 0; border-bottom: 1px solid var(--line); }
+.training-card h3 { margin-bottom: 12px; font-size: 28px; font-weight: 400; }
+.training-card p { max-width: 580px; margin-bottom: 16px; }
+.training-card span { color: var(--orange); font: 11px Arial, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+.training-card > svg, .certificate-card a svg { width: 20px; height: 20px; }
+.detail-copy > p { max-width: 450px; font-size: 22px; line-height: 1.3; }
+.detail-copy ul { padding: 22px 0 0; margin: 0; border-top: 1px solid var(--line); list-style: none; font: 14px Arial, sans-serif; }
+.detail-copy li { display: flex; gap: 12px; padding: 11px 0; }
+.detail-copy li svg { width: 17px; color: var(--orange); }
+.certificate-grid { grid-template-columns: repeat(2, 1fr); }
+.certificate-card { min-height: 290px; }
+.certificate-card a { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 600 12px Arial, sans-serif; text-decoration: none; }
+.notice-section { max-width: 1224px; margin: 0 auto; padding: 28px 0 100px; display: flex; gap: 18px; }
+.notice-section > svg { flex: 0 0 auto; color: var(--orange); }
+.notice-section h3 { margin-bottom: 8px; font: 600 14px Arial, sans-serif; }
+.notice-section p { max-width: 700px; margin: 0; color: var(--muted); font: 14px/1.5 Arial, sans-serif; }
+.closing-band { padding: 52px max(24px, calc((100% - 1224px) / 2)); display: flex; justify-content: space-between; align-items: center; gap: 25px; background: var(--orange); color: #fff; }
+.closing-band p { margin: 0; font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -.04em; }
+.contact-hero { display: grid; grid-template-columns: 1fr .8fr; gap: 10vw; align-items: center; min-height: 680px; }
+.contact-details { display: grid; gap: 14px; margin-top: 50px; font: 13px/1.5 Arial, sans-serif; }
+.contact-details a, .contact-details div { display: flex; gap: 15px; align-items: center; color: var(--ink); text-decoration: none; }
+.contact-details svg { width: 21px; color: var(--orange); }
+.contact-details strong { font-weight: 500; }
+.contact-form { padding: 36px; background: #fff; }
+.contact-form h2 { margin-bottom: 28px; font-size: 35px; }
+.contact-form label { display: block; margin-bottom: 18px; font: 12px Arial, sans-serif; }
+.contact-form input, .contact-form textarea { display: block; width: 100%; margin-top: 8px; padding: 13px 0; border: 0; border-bottom: 1px solid var(--line); outline: 0; resize: vertical; font: 14px Arial, sans-serif; }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--orange); }
+.form-message { margin: 18px 0 0; color: #28764a; font: 13px Arial, sans-serif; }
+.site-footer { max-width: 1400px; margin: auto; padding: 30px 24px; display: flex; justify-content: space-between; color: var(--muted); font: 11px Arial, sans-serif; }
+.site-footer a { color: var(--ink); text-decoration: none; }
+@media (max-width: 760px) { .site-header { padding: 10px; } .site-nav { padding: 5px 8px 5px 5px; } .brand span:last-child, .nav-links { display: none; } .nav-cta { padding: 12px 14px; } .page-hero, .page-hero-split, .contact-hero { display: block; min-height: auto; } .page-hero { padding-top: 90px; padding-bottom: 90px; } .page-hero-split .hero-image { margin-top: 48px; } h1 { font-size: clamp(3.4rem, 17vw, 6rem); } .hero-copy { font-size: 16px; } .section-intro, .process-section, .details-section { display: block; margin-bottom: 45px; } .section-intro h2 { margin-left: 0; } .service-grid, .certificate-grid { grid-template-columns: 1fr; } .service-card, .certificate-card { min-height: 0; padding: 26px; } .service-card svg, .certificate-card > svg { margin-bottom: 35px; } .content-section, .process-section, .details-section { padding-top: 75px; padding-bottom: 75px; } .training-card { grid-template-columns: 36px 1fr 20px; gap: 10px; } .training-card h3 { font-size: 22px; } .notice-section { padding: 0 24px 70px; } .closing-band { display: block; } .closing-band p { margin-bottom: 28px; } .contact-hero { padding-top: 80px; } .contact-form { margin-top: 55px; padding: 26px; } .site-footer { gap: 20px; } }
+

@@ -1,245 +1,297 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Ps. Pablo Uribe Bissotto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
-        }
-
-        body {
-            margin: 0;
-            background: #f4f6f7;
-            color: #333;
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            background: #3f7f7a;
-            color: white;
-            padding: 12px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            position: relative;
-            height: 420px;
-            background: linear-gradient(
-                rgba(30, 60, 90, 0.75),
-                rgba(30, 60, 90, 0.75)
-            ),
-            url("https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3")
-            center / cover no-repeat;
-            display: flex;
-            align-items: center;
-            padding: 40px;
-            color: white;
-        }
-
-        .hero-content h1 {
-            margin-top: 0;
-        }
-
-        /* ===== MAIN ===== */
-        main {
-            max-width: 1100px;
-            margin: 40px auto 60px;
-            padding: 0 20px;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .box {
-            background: white;
-            border-radius: 6px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        }
-
-        .box h2 {
-            margin-top: 0;
-            color: #3f7f7a;
-        }
-
-        .box p {
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .justificado {
-            text-align: justify;
-            hyphens: auto;
-        }
-
-        .box ul {
-            padding-left: 20px;
-            font-size: 14px;
-        }
-
-        /* ===== FORM ===== */
-        form label {
-            display: block;
-            font-size: 13px;
-            margin-top: 12px;
-        }
-
-        form input,
-        form textarea,
-        form select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 4px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        form textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        form button {
-            margin-top: 15px;
-            padding: 10px;
-            width: 100%;
-            background: #3f7f7a;
-            border: none;
-            color: white;
-            font-size: 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        form button:hover {
-            background: #356c68;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            text-align: center;
-            font-size: 13px;
-            color: #666;
-            padding: 20px;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                height: 300px;
-                padding: 25px;
-            }
-
-            .hero h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pablo Uribe Bissotto | Psicólogo Clínico</title>
+<meta name="description" content="Atención a clientes, capacitaciones y certificados psicológicos para guardias, tratamientos y más.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  html{scroll-behavior:smooth;}
+  body{background:#EFEFEF; color:#111827; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
+  .text-roll{overflow:hidden; height:20px;}
+  .text-roll-inner{display:flex; flex-direction:column; transition:transform .5s cubic-bezier(0.25,0.1,0.25,1);}
+  .group:hover .text-roll-inner{transform:translateY(-50%);}
+  .arrow-rotate{transition:transform .5s cubic-bezier(0.25,0.1,0.25,1);}
+  .group:hover .arrow-rotate{transform:rotate(-45deg);}
+  .hero-bg{
+    background:
+      radial-gradient(circle at 75% 30%, rgba(242,101,34,0.18), transparent 45%),
+      radial-gradient(circle at 20% 70%, rgba(0,0,0,0.04), transparent 50%),
+      #EFEFEF;
+  }
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  #mobileMenu{transform:translateY(100%); transition:transform .5s cubic-bezier(0.32,0.72,0,1);}
+  #mobileMenu.open{transform:translateY(0);}
+</style>
 </head>
+<body class="antialiased">
 
-<body>
+<!-- ============ HERO ============ -->
+<section class="relative min-h-screen flex flex-col hero-bg overflow-hidden">
 
-<header>
-    <strong>Ps. Pablo Uribe Bissotto</strong>
-    <nav>
-        <a href="#">Inicio</a>
-        <a href="#atencion">Atención</a>
-        <a href="#contacto">Contacto</a>
+  <!-- NAV -->
+  <div class="relative z-20 max-w-[1440px] mx-auto w-full p-2 sm:p-3">
+    <nav class="bg-white rounded-full flex items-center justify-between p-[5px] shadow-sm">
+      <div class="flex items-center gap-4 pl-1">
+        <img src="logooriginal.png" alt="Logotipo de Pablo Uribe Bissotto" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-contain" />
+        <div class="hidden md:flex items-center gap-6">
+          <a href="atencion.html" class="text-[18px] text-gray-900 hover:text-gray-500 transition-colors duration-300">Atención a Clientes</a>
+          <a href="capacitaciones.html" class="text-[18px] text-gray-900 hover:text-gray-500 transition-colors duration-300">Capacitaciones</a>
+          <a href="certificados.html" class="text-[18px] text-gray-900 hover:text-gray-500 transition-colors duration-300">Certificados</a>
+          <a href="contacto.html" class="text-[14px] text-gray-900 hover:text-gray-500 transition-colors duration-300">Contacto</a>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-4 pr-1">
+        <span class="hidden lg:inline text-[13px] text-gray-600">Agendando horas para Julio 2026</span>
+        <span class="flex items-center gap-1.5 text-[13px] text-gray-600">
+          <i data-lucide="clock" class="w-[14px] h-[14px]"></i>
+          <span id="liveTime">--:--</span> en Santiago
+        </span>
+        <a href="#contacto" class="group flex items-center gap-2 bg-gray-900 text-white rounded-full pl-5 pr-2 py-2">
+          <span class="text-roll text-[13px] font-medium">
+            <span class="text-roll-inner">
+              <span>Agendar hora</span>
+              <span>Agendar hora</span>
+            </span>
+          </span>
+          <span class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gray-900 arrow-rotate"></i>
+          </span>
+        </a>
+      </div>
+
+      <button id="menuToggle" class="md:hidden bg-gray-900 rounded-full p-2.5 mr-1 text-white">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
     </nav>
-</header>
+  </div>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Un espacio para tu bienestar mental</h1>
-        <p>
-            Acompañamiento profesional en un entorno seguro, confidencial
-            y centrado en tu bienestar emocional.
-        </p>
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60" id="menuBackdrop"></div>
+    <div class="absolute bottom-0 left-0 right-0 bg-white rounded-2xl mx-3 mb-3 p-6">
+      <div class="flex justify-between items-center mb-8">
+        <span class="flex items-center gap-1.5 text-[13px] text-gray-600 bg-gray-100 px-3 py-1.5 rounded-full">
+          <i data-lucide="clock" class="w-[14px] h-[14px]"></i> <span id="liveTimeMobile">--:--</span>
+        </span>
+        <button id="menuClose" class="bg-gray-900 rounded-full p-2.5 text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="flex flex-col gap-5 mb-8">
+        <a href="atencion.html" class="menu-link text-[28px] font-medium text-gray-900">Atención a Clientes</a>
+        <a href="capacitaciones.html" class="menu-link text-[28px] font-medium text-gray-900">Capacitaciones</a>
+        <a href="certificados.html" class="menu-link text-[28px] font-medium text-gray-900">Certificados</a>
+        <a href="contacto.html" class="menu-link text-[28px] font-medium text-gray-900">Contacto</a>
+      </div>
+      <a href="#contacto" class="menu-link group flex items-center justify-between bg-gray-900 text-white rounded-full pl-6 pr-2 py-2">
+        <span class="text-[14px] font-medium">Agendar consulta</span>
+        <span class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+          <i data-lucide="arrow-right" class="w-4 h-4 text-gray-900 arrow-rotate"></i>
+        </span>
+      </a>
     </div>
+  </div>
+
+  <!-- HERO CONTENT -->
+  <div class="flex-1"></div>
+  <div class="relative z-20 max-w-[1440px] mx-auto w-full px-5 sm:px-8 lg:px-12 pb-14 sm:pb-16 lg:pb-20">
+    <p class="text-[21px] sm:text-[24px] font-medium text-gray-900 tracking-wide mb-5 sm:mb-8">Pablo Uribe Bissotto · Psicólogo Clínico</p>
+    <h1 class="font-medium leading-[1.08] tracking-[-0.03em] text-gray-900" style="font-size:clamp(1.45rem,5vw,3.2rem)">
+      Acompañamiento profesional,<br class="hidden sm:block"/><span class="sm:hidden"> </span>
+      capacitación especializada<br class="hidden sm:block"/><span class="sm:hidden"> </span>
+      y certificación cuando la necesitas.
+    </h1>
+
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 mt-8 sm:mt-12">
+      <a href="#contacto" class="group flex items-center gap-2 bg-[#F26522] hover:bg-[#e05a1a] text-white rounded-full pl-5 sm:pl-6 pr-2 py-2 w-fit transition-colors">
+        <span class="text-roll text-[12px] sm:text-[13px] font-medium">
+          <span class="text-roll-inner">
+            <span>Reservar consulta</span>
+            <span>Reservar consulta</span>
+          </span>
+        </span>
+        <span class="w-7 h-7 sm:w-8 sm:h-8 bg-white rounded-full flex items-center justify-center">
+          <i data-lucide="arrow-right" class="w-4 h-4 text-[#F26522] arrow-rotate"></i>
+        </span>
+      </a>
+
+    </div>
+  </div>
 </section>
 
-<main>
-    <div class="container">
-
-        <div class="box" id="atencion">
-            <h2>Información de Atención</h2>
-
-            <p class="justificado">
-                Se ofrece atención psicológica individual dirigida a personas de todas las edades, orientada al bienestar emocional y al fortalecimiento de recursos personales. El proceso terapéutico se desarrolla en un espacio seguro, confidencial y respetuoso, adaptado a las características y necesidades de cada etapa del ciclo vital. La intervención aborda diversas problemáticas, tales como ansiedad, estado de ánimo, manejo del estrés, dificultades relacionales y procesos de adaptación personal, considerando un enfoque profesional, ético y centrado en la persona. La atención se realiza en modalidad presencial y online.
-            </p>
-
-            <strong>Modalidades:</strong>
-            <ul>
-                <li>Presencial: Centro Integral Cumbres, calle Tangue 155, Ovalle
-                                CEDMIMED, calle Coquimbo 176, Ovalle.</li>
-                <li>Online (videollamada)</li>
-            </ul>
-
-            <strong>Horarios:</strong>
-            <ul>
-                <li>Lunes a Viernes: 09:00 – 19:00 hrs</li>
-                <li>Sábados: 10:00 – 14:00 hrs</li>
-            </ul>
-        </div>
-
-        <div class="box" id="contacto">
-            <h2>Agendar una Cita</h2>
-
-            <form action="https://formspree.io/f/mjkgzrrq" method="POST">
-                <label>Nombre Completo</label>
-                <input type="text" name="nombre" required>
-
-                <label>Correo Electrónico</label>
-                <input type="email" name="email" required>
-
-                <label>WhatsApp / Teléfono</label>
-                <input type="tel" name="telefono" placeholder="+56 9 XXXX XXXX" required>
-
-                <label>Modalidad</label>
-                <select name="modalidad">
-                    <option value="Presencial">Presencial</option>
-                    <option value="Online">Online</option>
-                </select>
-
-                <label>Breve motivo de consulta (opcional)</label>
-                <textarea name="mensaje"></textarea>
-
-                <input type="text" name="_gotcha" style="display:none">
-
-                <button type="submit">Enviar Solicitud</button>
-            </form>
-        </div>
-
+<!-- ============ ATENCIÓN A CLIENTES ============ -->
+<section id="atencion" class="bg-white pt-16 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-24">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="px-5 sm:px-8 lg:px-12 flex items-center gap-3 mb-6 sm:mb-8 reveal">
+      <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-900 text-white flex items-center justify-center text-[11px] sm:text-[12px] font-semibold">1</span>
+      <span class="text-[16px] sm:text-[18px] font-medium border border-gray-200 rounded-full px-3 sm:px-4 py-1 sm:py-1.5">Atención a Clientes</span>
     </div>
-</main>
 
-<footer>
-    © 2026 Ps. Pablo Uribe Bissotto · Todos los derechos reservados<br>
-    psicologopablouribe@gmail.com
+    <h2 class="px-5 sm:px-8 lg:px-12 font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 mb-12 sm:mb-16 lg:mb-20" style="font-size:clamp(1.8rem,4.5vw,3.8rem)">
+      Terapia personalizada para cada etapa<br/>de tu bienestar emocional.
+    </h2>
+
+    <div class="px-5 sm:px-8 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6" id="atencionGrid"></div>
+  </div>
+</section>
+
+<!-- ============ CAPACITACIONES ============ -->
+<section id="capacitaciones" class="bg-[#F5F5F5] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 lg:pb-28">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="px-5 sm:px-8 lg:px-12 flex items-center gap-3 mb-6 sm:mb-8 reveal">
+      <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-900 text-white flex items-center justify-center text-[11px] sm:text-[12px] font-semibold">2</span>
+      <span class="text-[16px] sm:text-[18px] font-medium border border-gray-300 rounded-full px-3 sm:px-4 py-1 sm:py-1.5">Capacitaciones</span>
+    </div>
+
+    <h2 class="px-5 sm:px-8 lg:px-12 font-medium leading-[1.08] tracking-[-0.03em] text-gray-900 mb-10 sm:mb-14 lg:mb-16" style="font-size:clamp(2rem,5.5vw,3.8rem)">
+      Formación para equipos<br class="hidden sm:block"/> y organizaciones
+    </h2>
+
+    <div class="px-5 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-7" id="capacitacionesGrid"></div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICADOS ============ -->
+<section id="certificados" class="bg-white pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 lg:pb-28">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="px-5 sm:px-8 lg:px-12 flex items-center gap-3 mb-6 sm:mb-8 reveal">
+      <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-900 text-white flex items-center justify-center text-[11px] sm:text-[12px] font-semibold">3</span>
+      <span class="text-[16px] sm:text-[18px] font-medium border border-gray-200 rounded-full px-3 sm:px-4 py-1 sm:py-1.5">Certificados</span>
+    </div>
+
+    <h2 class="px-5 sm:px-8 lg:px-12 font-medium leading-[1.08] tracking-[-0.03em] text-gray-900 mb-10 sm:mb-14 lg:mb-16" style="font-size:clamp(2rem,5.5vw,3.8rem)">
+      Certificación psicológica<br class="hidden sm:block"/> para distintos fines
+    </h2>
+
+    <div class="px-5 sm:px-8 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="certificadosGrid"></div>
+
+    <div class="px-5 sm:px-8 lg:px-12 mt-12 reveal">
+      <div class="bg-[#F5F5F5] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+        <p class="text-[14px] sm:text-[15px] text-gray-700 max-w-lg">¿Necesitas un certificado para un trámite específico que no aparece en la lista? Cuéntame el motivo y lo evaluamos en tu primera sesión.</p>
+        <a href="#contacto" class="group flex items-center gap-2 bg-gray-900 text-white rounded-full pl-5 pr-2 py-2 w-fit shrink-0">
+          <span class="text-roll text-[13px] font-medium">
+            <span class="text-roll-inner"><span>Consultar caso</span><span>Consultar caso</span></span>
+          </span>
+          <span class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gray-900 arrow-rotate"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" class="bg-[#F5F5F5] py-16 sm:py-20 lg:py-28">
+  <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 grid md:grid-cols-2 gap-8">
+    <div class="reveal bg-white rounded-2xl p-8 shadow-sm">
+      <h3 class="font-medium text-[22px] text-gray-900 mb-6">Escríbeme</h3>
+      <form onsubmit="event.preventDefault(); alert('Gracias, te contactaré pronto.'); this.reset();" class="flex flex-col gap-4">
+        <input required placeholder="Nombre completo" class="px-4 py-3 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:border-gray-900"/>
+        <input required type="email" placeholder="Correo electrónico" class="px-4 py-3 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:border-gray-900"/>
+        <textarea required rows="4" placeholder="Motivo de tu consulta" class="px-4 py-3 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:border-gray-900 resize-none"></textarea>
+        <button class="bg-gray-900 text-white rounded-full px-6 py-3 text-[14px] font-medium">Enviar mensaje</button>
+      </form>
+    </div>
+    <div class="reveal flex flex-col gap-4 justify-center">
+      <a href="tel:+56936567169" class="flex items-center gap-3 bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+        <i data-lucide="phone" class="w-5 h-5 text-gray-900"></i>
+        <span class="text-[14px] font-medium text-gray-900">Contacto: 936567169</span>
+      </a>
+      <a href="mailto:psicologopablouribe@gmail.com" class="flex items-center gap-3 bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+        <i data-lucide="mail" class="w-5 h-5 text-gray-900"></i>
+        <span class="text-[14px] font-medium text-gray-900">psicologopablouribe@gmail.com</span>
+      </a>
+      <div class="flex items-center gap-3 bg-white rounded-2xl p-5 shadow-sm">
+        <i data-lucide="map-pin" class="w-5 h-5 text-gray-900"></i>
+        <span class="text-[14px] font-medium text-gray-900">Ovalle, IV Región de Coquimbo, Chile</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="text-center text-[12px] text-gray-400 py-10 bg-[#F5F5F5]">
+  © 2026 Pablo Uribe Bissotto — Psicólogo Clínico. Todos los derechos reservados.
 </footer>
 
+<script>
+lucide.createIcons();
+
+/* live clock */
+function updateClock(){
+  const t = new Date().toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit', hour12:false, timeZone:'America/Santiago'});
+  document.getElementById('liveTime').textContent = t;
+  document.getElementById('liveTimeMobile').textContent = t;
+}
+updateClock(); setInterval(updateClock, 1000);
+
+/* mobile menu */
+const menu = document.getElementById('mobileMenu');
+document.getElementById('menuToggle').onclick = () => { menu.classList.remove('hidden'); requestAnimationFrame(()=>menu.classList.add('open')); };
+const closeMenu = () => { menu.classList.remove('open'); setTimeout(()=>menu.classList.add('hidden'),500); };
+document.getElementById('menuClose').onclick = closeMenu;
+document.getElementById('menuBackdrop').onclick = closeMenu;
+document.querySelectorAll('.menu-link').forEach(a => a.addEventListener('click', closeMenu));
+
+/* ---------- DATA ---------- */
+const atencion = [
+  {icon:"user", title:"Terapia Individual Adultos", desc:"Ansiedad, estrés, duelo, autoestima y procesos de cambio personal."},
+  {icon:"baby", title:"Psicología Infanto-Juvenil", desc:"Acompañamiento en desarrollo emocional de niños y adolescentes."},
+  {icon:"briefcase", title:"Psicología Laboral", desc:"Evaluaciones, burnout, clima organizacional y bienestar en el trabajo."},
+  {icon:"video", title:"Atención Online", desc:"Sesiones por videollamada con la misma calidad que la presencial."},
+  {icon:"compass", title:"Orientación Vocacional", desc:"Apoyo en decisiones académicas y de carrera."}
+];
+
+const capacitaciones = [
+  {title:"Primeros Auxilios Psicológicos", desc:"Capacitación para equipos de salud, educación y emergencias en contención emocional inicial.", img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&auto=format&fit=crop"},
+  {title:"Manejo del Estrés Laboral", desc:"Talleres in-company para prevenir burnout y mejorar el clima organizacional.", img:"https://images.unsplash.com/photo-1552581234-26160f608093?w=900&q=80&auto=format&fit=crop"}
+];
+
+const certificados = [
+  {icon:"shield", title:"Aptitud para Guardias y Vigilancia", desc:"Evaluación psicológica laboral requerida por OS-10."},
+  {icon:"stethoscope", title:"Certificado de Tratamiento", desc:"Constancia de proceso terapéutico para fines clínicos o legales."},
+  {icon:"car", title:"Aptitud Psicológica para Conducción", desc:"Evaluación requerida para licencias profesionales."},
+];
+
+function iconCard(icon){
+  return `<div class="w-11 h-11 rounded-2xl bg-gray-100 flex items-center justify-center text-gray-900"><i data-lucide="${icon}" class="w-5 h-5"></i></div>`;
+}
+
+document.getElementById('atencionGrid').innerHTML = atencion.map(a => `
+  <div class="reveal bg-[#F5F5F5] rounded-2xl p-6 sm:p-7 hover:shadow-md transition-shadow">
+    ${iconCard(a.icon)}
+    <h3 class="font-medium text-[15px] sm:text-[16px] text-gray-900 mt-5">${a.title}</h3>
+    <p class="text-[13px] text-gray-600 mt-2 leading-relaxed">${a.desc}</p>
+  </div>
+`).join('');
+
+document.getElementById('capacitacionesGrid').innerHTML = capacitaciones.map(c => `
+  <div class="reveal group cursor-pointer">
+    <div class="aspect-[329/246] rounded-2xl overflow-hidden bg-gray-200">
+      <img src="${c.img}" alt="${c.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+    </div>
+    <p class="text-[13px] sm:text-[14px] text-gray-600 mt-4 leading-relaxed">${c.desc}</p>
+    <h3 class="text-[14px] sm:text-[15px] font-semibold text-gray-900 mt-1">${c.title}</h3>
+  </div>
+`).join('');
+
+document.getElementById('certificadosGrid').innerHTML = certificados.map(c => `
+  <div class="reveal bg-[#F5F5F5] rounded-2xl p-6 hover:shadow-md transition-shadow">
+    ${iconCard(c.icon)}
+    <h3 class="font-medium text-[14px] text-gray-900 mt-5 leading-snug">${c.title}</h3>
+    <p class="text-[12px] text-gray-600 mt-2 leading-relaxed">${c.desc}</p>
+  </div>
+`).join('');
+
+lucide.createIcons();
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); } });
+}, {threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
 </body>
 </html>

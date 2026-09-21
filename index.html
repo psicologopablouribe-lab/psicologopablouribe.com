@@ -103,24 +103,44 @@
       y certificación cuando la necesitas.
     </h1>
 
-    <div class="mt-8 sm:mt-10 max-w-md rounded-[28px] border border-gray-200 bg-white/80 backdrop-blur-sm p-4 sm:p-5 shadow-sm">
-      <div class="flex items-center justify-between gap-3 mb-3">
+    <div class="mt-8 sm:mt-10 max-w-[560px] rounded-[28px] border border-gray-200 bg-white/80 backdrop-blur-sm p-4 sm:p-5 shadow-sm">
+      <div class="flex items-center justify-between gap-3 mb-4">
         <div class="flex items-center gap-2">
           <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#F26522]"></span>
           <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">Agenda</span>
         </div>
-        <span class="text-[11px] sm:text-[12px] font-medium text-gray-600">Lunes a viernes</span>
+        <div class="flex items-center gap-2">
+          <button id="prevMonth" type="button" class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 hover:border-gray-900" aria-label="Mes anterior">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button id="nextMonth" type="button" class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 hover:border-gray-900" aria-label="Mes siguiente">
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-3">
-        <div class="rounded-2xl bg-gray-50 p-3">
-          <p class="text-[10px] uppercase tracking-[0.16em] text-gray-500">Mañana</p>
-          <p class="mt-2 text-[15px] font-medium text-gray-900">09:00 - 13:00</p>
-        </div>
-        <div class="rounded-2xl bg-gray-50 p-3">
-          <p class="text-[10px] uppercase tracking-[0.16em] text-gray-500">Tarde</p>
-          <p class="mt-2 text-[15px] font-medium text-gray-900">15:00 - 18:00</p>
-        </div>
+      <div id="calendarHeader" class="mb-3 text-[16px] sm:text-[18px] font-medium text-gray-900"></div>
+
+      <div class="grid grid-cols-7 gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-gray-500 text-center">
+        <span>L</span>
+        <span>M</span>
+        <span>M</span>
+        <span>J</span>
+        <span>V</span>
+        <span>S</span>
+        <span>D</span>
+      </div>
+
+      <div id="calendarDays" class="mt-2 grid grid-cols-7 gap-2"></div>
+
+      <div id="slotPanel" class="mt-5 hidden border-t border-gray-200 pt-4">
+        <p class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">Horarios disponibles</p>
+        <p id="selectedDateLabel" class="mt-2 text-[14px] font-medium text-gray-900"></p>
+        <div id="timeSlots" class="mt-3 flex flex-wrap gap-2"></div>
+        <a id="bookingButton" href="https://calendly.com/psicologopablouribe/30min" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[#F26522] px-4 py-2.5 text-[12px] sm:text-[13px] font-medium text-white opacity-60 pointer-events-none transition-opacity">
+          <span>Agendar</span>
+          <i data-lucide="arrow-right" class="h-4 w-4"></i>
+        </a>
       </div>
     </div>
 
@@ -256,6 +276,141 @@ document.getElementById('menuClose').onclick = closeMenu;
 document.getElementById('menuBackdrop').onclick = closeMenu;
 document.querySelectorAll('.menu-link').forEach(a => a.addEventListener('click', closeMenu));
 
+/* ---------- BOOKING CALENDAR ---------- */
+const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const today = new Date();
+today.setHours(0,0,0,0);
+let currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+let selectedDate = null;
+let selectedSlot = null;
+
+const calendarHeader = document.getElementById('calendarHeader');
+const calendarDays = document.getElementById('calendarDays');
+const slotPanel = document.getElementById('slotPanel');
+const selectedDateLabel = document.getElementById('selectedDateLabel');
+const timeSlots = document.getElementById('timeSlots');
+const bookingButton = document.getElementById('bookingButton');
+
+function isAvailableDate(date) {
+  const day = date.getDay();
+  return date >= today && day !== 0 && day !== 6;
+}
+
+function getTimeSlots(date) {
+  const day = date.getDay();
+  const base = [
+    '09:00','09:30','10:00','10:30','11:00','11:30',
+    '15:00','15:30','16:00','16:30','17:00','17:30'
+  ];
+
+  if (day === 1 || day === 3 || day === 5) return base.slice(0, 6).concat(base.slice(6, 9));
+  if (day === 2 || day === 4) return base.slice(2, 8).concat(base.slice(8, 12));
+  return [];
+}
+
+function formatDate(date) {
+  return new Intl.DateTimeFormat('es-CL', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+}
+
+function renderCalendar() {
+  calendarHeader.textContent = `${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`;
+
+  const firstDayOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+  const firstWeekday = (firstDayOfMonth.getDay() + 6) % 7;
+  const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
+  const daysInPrevMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0).getDate();
+
+  const cells = [];
+
+  for (let i = firstWeekday - 1; i >= 0; i--) {
+    const value = daysInPrevMonth - i;
+    cells.push(`<button type="button" disabled class="h-10 rounded-xl border border-transparent bg-transparent text-[12px] text-gray-300">${value}</button>`);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    const active = isAvailableDate(date);
+    const isSelected = selectedDate && selectedDate.toDateString() === date.toDateString();
+    const classes = [
+      'h-10 rounded-xl border text-[12px] font-medium transition-colors',
+      isSelected ? 'border-[#F26522] bg-[#F26522] text-white shadow-sm' : 'border-gray-200 bg-white text-gray-900 hover:border-gray-900',
+      !active ? 'opacity-40 cursor-not-allowed' : ''
+    ].join(' ');
+
+    cells.push(`<button type="button" data-date="${date.toISOString()}" class="${classes}" ${!active ? 'disabled' : ''}>${day}</button>`);
+  }
+
+  const totalCells = cells.length;
+  const remaining = (7 - (totalCells % 7)) % 7;
+
+  for (let i = 1; i <= remaining; i++) {
+    cells.push(`<button type="button" disabled class="h-10 rounded-xl border border-transparent bg-transparent text-[12px] text-gray-300">${i}</button>`);
+  }
+
+  calendarDays.innerHTML = cells.join('');
+
+  calendarDays.querySelectorAll('button[data-date]').forEach(button => {
+    button.addEventListener('click', () => {
+      const date = new Date(button.dataset.date);
+      selectedDate = date;
+      selectedSlot = null;
+      bookingButton.classList.add('opacity-60', 'pointer-events-none');
+      bookingButton.querySelector('span').textContent = 'Agendar';
+      renderCalendar();
+      renderSlots();
+    });
+  });
+}
+
+function renderSlots() {
+  if (!selectedDate || !isAvailableDate(selectedDate)) {
+    slotPanel.classList.add('hidden');
+    return;
+  }
+
+  const slots = getTimeSlots(selectedDate);
+  selectedDateLabel.textContent = formatDate(selectedDate);
+  timeSlots.innerHTML = slots.map(slot => `
+    <button type="button" class="slot-button rounded-full border border-gray-200 bg-white px-3 py-2 text-[12px] font-medium text-gray-700 hover:border-gray-900 hover:text-gray-900 transition-colors" data-slot="${slot}">${slot}</button>
+  `).join('');
+
+  slotPanel.classList.remove('hidden');
+
+  timeSlots.querySelectorAll('.slot-button').forEach(button => {
+    button.addEventListener('click', () => {
+      selectedSlot = button.dataset.slot;
+      timeSlots.querySelectorAll('.slot-button').forEach(el => {
+        el.classList.toggle('border-[#F26522]', el === button);
+        el.classList.toggle('bg-[#FFF3EC]', el === button);
+        el.classList.toggle('text-[#F26522]', el === button);
+        el.classList.toggle('font-semibold', el === button);
+      });
+
+      bookingButton.classList.remove('opacity-60', 'pointer-events-none');
+      bookingButton.querySelector('span').textContent = `Agendar ${selectedDate.getDate()} ${monthNames[selectedDate.getMonth()].slice(0,3)} · ${selectedSlot}`;
+      bookingButton.setAttribute('href', `https://calendly.com/psicologopablouribe/30min?month=${selectedDate.getMonth()+1}&day=${selectedDate.getDate()}&time=${selectedSlot}`);
+    });
+  });
+}
+
+document.getElementById('prevMonth').addEventListener('click', () => {
+  currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+  selectedDate = null;
+  selectedSlot = null;
+  renderCalendar();
+  slotPanel.classList.add('hidden');
+});
+
+document.getElementById('nextMonth').addEventListener('click', () => {
+  currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+  selectedDate = null;
+  selectedSlot = null;
+  renderCalendar();
+  slotPanel.classList.add('hidden');
+});
+
+renderCalendar();
+
 /* ---------- DATA ---------- */
 const atencion = [
   {icon:"user", title:"Terapia Individual Adultos", desc:"Ansiedad, estrés, duelo, autoestima y procesos de cambio personal."},
@@ -284,7 +439,7 @@ document.getElementById('atencionGrid').innerHTML = atencion.map(a => `
   <div class="reveal bg-[#F5F5F5] rounded-2xl p-6 sm:p-7 hover:shadow-md transition-shadow">
     ${iconCard(a.icon)}
     <h3 class="font-medium text-[15px] sm:text-[16px] text-gray-900 mt-5">${a.title}</h3>
-    <p class="text-[13px] text-gray-600 mt-2 leading-relaxed">${a.desc}</p>
+    <p class="text-[15px] sm:text-[16px] text-gray-600 mt-2 leading-relaxed">${a.desc}</p>
   </div>
 `).join('');
 
@@ -293,7 +448,7 @@ document.getElementById('capacitacionesGrid').innerHTML = capacitaciones.map(c =
     <div class="aspect-[329/246] rounded-2xl overflow-hidden bg-gray-200">
       <img src="${c.img}" alt="${c.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
     </div>
-    <p class="text-[13px] sm:text-[14px] text-gray-600 mt-4 leading-relaxed">${c.desc}</p>
+    <p class="text-[15px] sm:text-[16px] text-gray-600 mt-4 leading-relaxed">${c.desc}</p>
     <h3 class="text-[14px] sm:text-[15px] font-semibold text-gray-900 mt-1">${c.title}</h3>
   </div>
 `).join('');
@@ -302,7 +457,7 @@ document.getElementById('certificadosGrid').innerHTML = certificados.map(c => `
   <div class="reveal bg-[#F5F5F5] rounded-2xl p-6 hover:shadow-md transition-shadow">
     ${iconCard(c.icon)}
     <h3 class="font-medium text-[14px] text-gray-900 mt-5 leading-snug">${c.title}</h3>
-    <p class="text-[12px] text-gray-600 mt-2 leading-relaxed">${c.desc}</p>
+    <p class="text-[14px] sm:text-[15px] text-gray-600 mt-2 leading-relaxed">${c.desc}</p>
   </div>
 `).join('');
 

@@ -23,6 +23,44 @@
       radial-gradient(circle at 20% 70%, rgba(0,0,0,0.04), transparent 50%),
       #EFEFEF;
   }
+  .agenda-frame{
+    padding:12px;
+    border:1px solid rgba(255,255,255,0.8);
+    border-radius:32px;
+    background:linear-gradient(rgba(255,255,255,0.38),rgba(255,255,255,0.38)),url('agenda.jfif') center / cover;
+    box-shadow:0 8px 24px rgba(17,24,39,0.12);
+  }
+  .agenda-frame-heading{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    min-height:54px;
+    padding:0 8px 12px;
+    color:#111827;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+  }
+  .agenda-frame-heading span{
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.82);
+    backdrop-filter:blur(6px);
+  }
+  .agenda-frame-heading::before{
+    content:"";
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#F26522;
+  }
+  .agenda-widget{
+    overflow:hidden;
+    border-radius:22px;
+    background:#fff;
+    opacity:0.92;
+  }
   .hero-bg::before{
     content:"";
     position:absolute;
@@ -124,8 +162,11 @@
       <p class="text-[18px] sm:text-[24px] font-medium text-gray-900 tracking-wide leading-tight">Pablo Uribe Bissotto · Psicólogo Clínico</p>
       <img src="foto%20pablo.png" alt="" class="hero-portrait h-[184px] w-[138px] shrink-0 self-center object-contain object-bottom lg:hidden" />
     </div>
-    <div class="mt-8 sm:mt-10 max-w-[560px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-sm">
-      <div class="calendly-inline-widget w-full" data-url="https://calendly.com/psicologopablouribe/30min?background_color=efefef&amp;text_color=111827&amp;primary_color=f26522" style="min-width:320px;height:700px;"></div>
+    <div class="agenda-frame mt-8 sm:mt-10 max-w-[560px]">
+      <div class="agenda-frame-heading"><span>Agenda</span></div>
+      <div class="agenda-widget">
+        <div class="calendly-inline-widget w-full" data-url="https://calendly.com/psicologopablouribe/30min?background_color=efefef&amp;text_color=111827&amp;primary_color=f26522" style="min-width:320px;height:700px;"></div>
+      </div>
     </div>
 
     <h1 class="mt-8 font-medium leading-[1.08] tracking-[-0.03em] text-gray-900" style="font-size:clamp(2.25rem,5vw,3.2rem)">
@@ -325,5 +366,3 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
-
-

@@ -8,6 +8,7 @@
 * { box-sizing: border-box; }
 body.site-page { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; }
 .site-header { padding: 14px 18px; position: relative; z-index: 2; }
+.training-header { padding-top: 0; }
 .site-nav { max-width: 1400px; margin: auto; min-height: 58px; padding: 5px; border-radius: 40px; background: #fff; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 2px 12px #0000000b; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font: 600 16px Arial, sans-serif; }
 .brand-mark { width: 34px; height: 34px; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: var(--paper) url('logooriginal.png') center / 100% 100% no-repeat; color: transparent; font-size: 0; overflow: hidden; }
@@ -77,4 +78,3 @@ h2 { max-width: 720px; margin-bottom: 0; font-size: clamp(2.7rem, 5.5vw, 5.5rem)
 .site-footer { max-width: 1400px; margin: auto; padding: 30px 24px; display: flex; justify-content: space-between; color: var(--muted); font: 11px Arial, sans-serif; }
 .site-footer a { color: var(--ink); text-decoration: none; }
 @media (max-width: 760px) { .site-header { padding: 10px; } .site-nav { padding: 5px 8px 5px 5px; } .brand span:last-child, .nav-links { display: none; } .nav-cta { padding: 12px 14px; } .page-hero, .page-hero-split, .contact-hero { display: block; min-height: auto; } .page-hero { padding-top: 90px; padding-bottom: 90px; } .page-hero-split .hero-image { margin-top: 48px; } h1 { font-size: clamp(3.6rem, 18vw, 6.4rem); } h2 { font-size: clamp(2.5rem, 10vw, 4rem); } .hero-copy { font-size: 18px; } .section-intro, .process-section, .details-section { display: block; margin-bottom: 45px; } .section-intro h2 { margin-left: 0; } .service-grid, .certificate-grid { grid-template-columns: 1fr; } .service-card, .certificate-card { min-height: 0; padding: 26px; } .service-card svg, .certificate-card > svg { margin-bottom: 35px; } .content-section, .process-section, .details-section { padding-top: 75px; padding-bottom: 75px; } .training-card { grid-template-columns: 36px 1fr 20px; gap: 10px; } .training-card h3 { font-size: 25px; } .notice-section { padding: 0 24px 70px; } .closing-band { display: block; } .closing-band p { margin-bottom: 28px; } .contact-hero { padding-top: 80px; } .contact-form { margin-top: 55px; padding: 26px; } .site-footer { gap: 20px; } }
-
